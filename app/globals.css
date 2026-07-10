@@ -10,20 +10,21 @@
   --color-border: var(--border);
   --color-surface: var(--surface);
   --color-accent: var(--accent);
-  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-hover: var(--accent-hover);
+  --color-navy: var(--navy);
 
   --spacing-18: 4.5rem;
   --spacing-88: 22rem;
   --spacing-128: 32rem;
 
-  --animate-fade-up: fadeUp 0.7s ease forwards;
-  --animate-fade-in: fadeIn 0.5s ease forwards;
+  --animate-fade-up: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fadeIn 0.4s ease forwards;
   --animate-marquee: marquee 40s linear infinite;
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -50,14 +51,23 @@
   }
 }
 
+/* Stripe's exact color system */
 :root {
-  --background: #080808;
-  --foreground: #f5f5f5;
-  --muted: #6b7280;
-  --border: rgba(255, 255, 255, 0.07);
-  --surface: rgba(255, 255, 255, 0.03);
-  --accent: #7c3aed;
-  --accent-secondary: #4f46e5;
+  --background: #ffffff;
+  --foreground: #0a2540;
+  --muted: #425466;
+  --border: rgba(10, 37, 64, 0.1);
+  --surface: #f6f9fc;
+  --accent: #635bff;
+  --accent-hover: #7a73ff;
+  --navy: #0a2540;
+
+  /* hero gradient stops — the animated mesh */
+  --grad-purple: #7c73ff;
+  --grad-blue: #0093f5;
+  --grad-cyan: #80e9ff;
+  --grad-pink: #a960ee;
+  --grad-green: #00d924;
 }
 
 *,
@@ -76,7 +86,12 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   font-feature-settings:
     "rlig" 1,
     "calt" 1,
@@ -87,33 +102,34 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 58, 237, 0.25);
-  color: #f5f5f5;
+  background: rgba(99, 91, 255, 0.15);
+  color: var(--navy);
 }
 
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--surface);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(10, 37, 64, 0.15);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(10, 37, 64, 0.25);
 }
 
+/* gradient text — used on headlines */
 .gradient-text {
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%);
+  background: linear-gradient(135deg, #0a2540 0%, #425466 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-accent {
-  background: linear-gradient(135deg, #a78bfa 0%, #6366f1 50%, #38bdf8 100%);
+  background: linear-gradient(135deg, #635bff 0%, #0093f5 50%, #80e9ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -130,21 +146,11 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.3), rgba(0, 147, 245, 0.1));
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-}
-
-.noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4;
-  pointer-events: none;
-  border-radius: inherit;
 }
