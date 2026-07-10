@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+# Run lint-staged (ESLint + Prettier on staged files)
+npx lint-staged
+
+# TypeScript type check — catches broken types before they hit the repo
+echo "Type checking..."
+npm run typecheck
+
+echo "Pre-commit passed."

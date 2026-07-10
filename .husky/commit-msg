@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Enforce conventional commit format
+# Valid: feat: add hero section
+# Valid: fix: correct mobile nav overflow
+# Invalid: "updated stuff", "WIP", "asdf"
+
+npx --no -- commitlint --edit "$1"
